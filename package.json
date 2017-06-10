@@ -1,0 +1,30 @@
+{
+  "name": "opinionated",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "3",
+    "react": "^15.5.4",
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
+    "react-spinner": "^0.2.7",
+    "react-table": "^6.2.0",
+    "redux": "^3.6.0",
+    "redux-form": "^6.7.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "sh -ac '. ./.env.${REACT_APP_ENV}; react-scripts build'",
+    "build:dev": "sh -ac 'REACT_APP_ENV=dev yarn build'",
+    "build:stg": "sh -ac 'REACT_APP_ENV=stg yarn build'",
+    "build:prd": "sh -ac 'REACT_APP_ENV=prd yarn build'",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
