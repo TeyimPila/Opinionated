@@ -4,6 +4,9 @@ import {Form, Col, Grid, Row, Button} from "react-bootstrap";
 import renderField from './renderField'
 import renderStatic from './renderStatic'
 import renderSelect from './renderSelect'
+import renderCheckbox from './renderCheckbox'
+import renderTextArea from './renderTextArea'
+import renderRadio from './renderRadio'
 
 //import { ControlLabel, FormControl, FormGroup, HelpBlock } from "react-bootstrap";
 
@@ -20,6 +23,7 @@ const inpast = value => value && new Date(value) < now ? undefined : 'Must be in
 const maxLength = max => value =>
     value && value.length > max ? `Must be ${max} characters or less` : undefined
 const maxLength15 = maxLength(15)
+const maxLength50 = maxLength(50)
 const number = value => value && isNaN(Number(value)) ? 'Must be a number' : undefined
 const minValue = min => value =>
     value && value < min ? `Must be at least ${min}` : undefined
@@ -28,13 +32,12 @@ const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
         'Invalid email address' : undefined
 const tooOld = value =>
-    value && value > 35 ? 'You might be too old for this' : undefined
+    value && value > 75 ? 'You might be too old for this' : undefined
 const aol = value =>
     value && /.+@aol\.com/.test(value) ?
         'Really? You still use AOL for your email?' : undefined
 
-const noweed = value => value === 'Weed' ? 'Say no to drugs mkay' : undefined
-const nogirlsplease = value => value === 'Female' ? 'No Girls allowed' : undefined
+const noweed = value => value === 'Weed' ? 'Say no to drugs mmmkay' : undefined
 
 
 function countWords(str) {
@@ -50,25 +53,26 @@ const toowordy = value => countWords(value) > 3 ? 'Too wordy' : undefined
 const validate = (values) => {
     const errors = {}
 
-    if (values.solo) {
-        errors.solo = 'do not fly solo'
+    if (values.Solo && values.Licence === 'Restricted') {
+        errors.Solo = 'do not fly solo on a restricted licence'
     }
 
-    if (values.sex === 'No') {
-        errors.sex = 'We need a bit of sex now and again'
-    }
-
-    if (values.choosey === 'Oranges' && values.username === 'Steve') {
-        errors.choosey = 'No Oranges for Steve'
+    if (values.Plane === 'LearJet' && values.FirstName === 'Steve') {
+        errors.Plane = 'No LearJet for Steve'
     }
 
     return errors
 }
 
+const licences = [
+    {label: 'Restricted', value: 'Restricted'},
+    {label: 'Solo', value: 'Solo'},
+    {label: 'Unrestricted', value: 'Unrestricted'},
+]
 
 const MyForm = (props) => {
 
-    const {handleSubmit, pristine, reset, submitting} = props
+    const {handleSubmit, onDelete, pristine, reset, submitting} = props
     return (
         <div className="well well-sm">
             <Form horizontal onSubmit={handleSubmit}>
@@ -76,9 +80,8 @@ const MyForm = (props) => {
                     <Row className="show-grid">
                         <hr/>
                     </Row>
-                    <Field name="ID" type="text" label="ID"
+                    <Field name="ID" label="ID"
                            component={renderStatic}
-                           readonly
                     />
                     <Field name="FirstName" type="text" label="First Name"
                            component={renderField}
@@ -87,7 +90,7 @@ const MyForm = (props) => {
                     />
                     <Field name="LastName" type="text" label="Last Name"
                            component={renderField}
-                           validate={[required, maxLength15]}
+                           validate={[required, maxLength50]}
                            warn={notsteve}
                     />
                     <Field name="Email" type="email" label="Email"
@@ -95,27 +98,29 @@ const MyForm = (props) => {
                            validate={email}
                            warn={aol}
                     />
-                    <Field name="Solo" type="checkbox" label="Can Fly Solo?"
-                           component={renderField}
+                    <Field name="Solo" type="checkbox" label="Ready to fly solo?"
+                           parse={(value, name) => value ? true : false}
+                           component={renderCheckbox}
                     />
                     <Field name="StartDate" type="date" label="Start Date"
                            component={renderField}
                            validate={[required, isdate, inpast]}
+                           format={(value) => value.substring(0, 10)}
                     />
                     <Field name="Age" type="number" label="Age"
                            component={renderField}
-                           validate={[required, number, minValue18, tooOld]}
+                           validate={[required, number, minValue18]}
                            warn={tooOld}
                     />
-                    <Field name="Notes" type="textarea" label="Notes"
-                           component={renderField}
+                    <Field name="Notes" label="Notes"
+                           component={renderTextArea}
                            validate={[required]}
                            warn={[toowordy]}
                     />
 
                     <Field name="Gender" type="select"  label="Gender"
                            component={renderSelect}
-                           validate={[required, nogirlsplease]}>
+                           validate={[required]}>
                         <option></option>
                         <option >Male</option>
                         <option >Female</option>
@@ -126,28 +131,24 @@ const MyForm = (props) => {
 
                     <Field name="Plane" type="select"  label="Choose Plane"
                            component={renderSelect}
-                           validate={[noweed]}>
+                           validate={[required, noweed]}>
                         <option></option>
-                        <option >Cesna</option>
+                        <option >Cessna</option>
                         <option >LearJet</option>
                         <option >747</option>
                         <option >Weed</option>
                     </Field>
 
-                    <Row className="show-grid">
-                        <Col md={2}>
-                            <label>Night Licence</label>
-                        </Col>
-                        <Col md={10}>
-                            <label><Field name="Night" component="input" type="radio" value="0" /> No</label>{"  "}
-                            <label><Field name="Night" component="input" type="radio" value="1" /> Yes</label>
-                        </Col>
-                    </Row>
+                    <Field name="Licence" component={renderRadio} label="Licence type"
+                        options={licences}
+                           inline
+                    />
+
 
                     <Field name="Created" type="date" label="Created Date"
-                           component={renderField}
-                           validate={[required, isdate, inpast]}
+                           component={renderStatic}
                     />
+
                     <Row className="show-grid">
                         <br/>
                     </Row>
@@ -157,9 +158,12 @@ const MyForm = (props) => {
                         </Col>
                         <Col md={10}>
                             <Button bsStyle="primary" bsSize="xsmall" type="submit"
-                                    disabled={submitting}>Submit</Button>
+                                    disabled={submitting}>Save</Button>
+                            {' '}
                             <Button type="button" bsSize="xsmall" disabled={pristine || submitting} onClick={reset}>Clear
                                 Values</Button>
+                            {' '}
+                            <Button bsStyle="danger" type="button" bsSize="xsmall" disabled={submitting} onClick={onDelete}>Delete</Button>
                         </Col>
                     </Row>
                 </Grid>

@@ -11,12 +11,14 @@ const Home = () => {
                 <ul>
                     <li>React</li>
                     <li>Redux</li>
-                    <li>Redux Form</li>
+                    <li>Redux Form WITH React-Bootstrap</li>
                     <li>React Router v4</li>
                     <li>Redux Thunk</li>
                     <li>Web API Fetching</li>
                     <li>React Bootstrap</li>
                     <li>Working Menus</li>
+                    <li>Asynchronous Typeahead</li>
+                    <li>Working Confirm Modal</li>
                     <li>Multiple Environments</li>
                     <ul>
                         <li>Local</li>

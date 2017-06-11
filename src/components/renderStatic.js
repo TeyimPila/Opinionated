@@ -1,21 +1,19 @@
 
 import React from 'react'
-import {Col, Row} from "react-bootstrap";
+import {Col, ControlLabel, FormControl, FormGroup} from "react-bootstrap";
 
-const renderStatic = ({input, label}) => {
-
-    return <Row className="show-grid">
-        <Col md={2}>
-            <label>{label}</label>
-        </Col>
-        <Col md={5} className="form-control-static">
-            <p>{input.value}</p>
+const renderStatic = (props) => {
+    const {input, label} = props
+    return <FormGroup className="show-grid row"
+    >
+        <Col md={2}><ControlLabel>{label}</ControlLabel></Col>
+        <Col md={5}>
+            <FormControl.Static>{ input.value }</FormControl.Static>
         </Col>
         <Col md={5}>
-            {' '}
+            { ' ' }
         </Col>
-    </Row>
+    </FormGroup>
 }
-
 
 export default renderStatic

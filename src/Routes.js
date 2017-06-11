@@ -5,12 +5,14 @@ import DetailContainer from './containers/DetailContainer'
 import Home from './components/Home'
 import About from './components/About'
 import Contact from './components/Contact'
+import EditContainer from "./containers/EditContainer";
 
 export const Routes = () => (
   <Switch>
     <Route path="/" exact component={Home} />
     <Route path="/people" component={PeopleContainer} />
     <Route path="/details/:id" component={DetailContainer} />
+    <Route path="/edit" component={EditContainer} />
     <Route path="/about" component={About} />
     <Route path="/contact" component={Contact} />
   </Switch>

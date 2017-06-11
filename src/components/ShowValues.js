@@ -49,7 +49,7 @@ const ShowValues = (props) => {
         const o = form.values
 
         const r = Object.keys(o).map((key, index) => {
-            return <tr key={index}><td>{key}</td><td>{': '}</td><td>{o[key]}</td></tr>
+            return <tr key={index}><td>{key}</td><td>{': '}</td><td>{JSON.stringify(o[key])}</td></tr>
         })
         return (<table style={tablestyle}><tbody>{r}</tbody></table>)
     }

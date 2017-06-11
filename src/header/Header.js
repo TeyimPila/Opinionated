@@ -27,19 +27,10 @@ const Header = () => (
                     <LinkContainer to="/people">
                         <MenuItem>People Search</MenuItem>
                     </LinkContainer>
-                    <LinkContainer to="/details">
-                        <MenuItem>Detailed Form</MenuItem>
+                    <LinkContainer to="/edit">
+                        <MenuItem>Edit Form</MenuItem>
                     </LinkContainer>
                 </NavDropdown>
-
-                {/*<NavDropdown title="CRM" id="crm-dropdown">*/}
-                    {/*<LinkContainer to="/crm">*/}
-                        {/*<MenuItem>CRM</MenuItem>*/}
-                    {/*</LinkContainer>*/}
-                    {/*<LinkContainer to="/crmsrch">*/}
-                        {/*<MenuItem>Search CRM Audits</MenuItem>*/}
-                    {/*</LinkContainer>*/}
-                {/*</NavDropdown>*/}
 
                 <LinkContainer to="/about">
                     <NavItem>About</NavItem>

@@ -1,24 +1,32 @@
-
 import React from 'react'
-import {Col, Row} from "react-bootstrap";
+import {Col, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
 
-const renderSelect = (props) => {
-    const {input, label, children, meta: {touched, error, warning}} = props
-    return <Row className="show-grid">
-        <Col md={2}>
-            <label>{label}</label>
-        </Col>
+const renderSelect = ({input, label, children, meta: {touched, error, warning}}) => {
+
+    const getValidationState = () => {
+        return error ? 'error' : warning ? 'warning' : 'success'
+    }
+
+    return <FormGroup className="show-grid row"
+                      controlId="formBasicText"
+                      validationState={getValidationState()}
+    >
+        <Col md={2}><ControlLabel>{label}</ControlLabel></Col>
         <Col md={5}>
-            <select className="form-control"  {...input} >{children}</select>
+            <FormControl
+                componentClass="select"
+                {...input}
+                children={ children }
+            />
+            <FormControl.Feedback/>
         </Col>
         <Col md={5}>
             {touched &&
-            ((error && <span style={{fontWeight: "bold", color: 'red'}}>{error}</span>) ||
-                (warning && <span style={{fontWeight: "bold", color: 'darkorange'}}>{warning}</span>))}
+            ((error && <HelpBlock>{error}</HelpBlock>) ||
+                (warning && <HelpBlock>{warning}</HelpBlock>))}
         </Col>
-    </Row>
+    </FormGroup>
 }
-
 
 
 export default renderSelect

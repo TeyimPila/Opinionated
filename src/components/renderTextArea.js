@@ -1,7 +1,7 @@
 import React from 'react'
 import {Col, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
 
-const renderField = ({input, label, type, meta: {touched, error, warning}}) => {
+const renderTextArea = ({input, label, meta: {touched, error, warning}}) => {
 
     const getValidationState = () => {
         return error ? 'error' : warning ? 'warning' : 'success'
@@ -15,10 +15,10 @@ const renderField = ({input, label, type, meta: {touched, error, warning}}) => {
         <Col md={5}>
             <FormControl
                 {...input}
-                type={type}
+                componentClass="textarea"
                 placeholder={label}
             />
-            {type === 'text' && <FormControl.Feedback/>}
+            <FormControl.Feedback/>
         </Col>
         <Col md={5}>
             {touched &&
@@ -29,4 +29,4 @@ const renderField = ({input, label, type, meta: {touched, error, warning}}) => {
 }
 
 
-export default renderField
+export default renderTextArea

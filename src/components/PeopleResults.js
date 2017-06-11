@@ -90,10 +90,9 @@ const PeopleResults = (props) => {
                 width: 100,
             },
             {
-                Header: 'Night',
-                accessor: 'Night',
-                width: 50,
-                Cell: ({value}) => (<span>{value ? 'Yes' : 'No'}</span>)
+                Header: 'Licence',
+                accessor: 'Licence',
+                width: 80,
             },
             {
                 Header: 'Created',

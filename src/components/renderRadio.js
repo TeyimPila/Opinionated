@@ -1,7 +1,7 @@
 import React from 'react'
-import {Col, ControlLabel, Checkbox, FormGroup, HelpBlock} from "react-bootstrap";
+import {Col, ControlLabel, Radio, FormGroup, HelpBlock} from "react-bootstrap";
 
-const renderCheckbox = ({input, label, meta: {touched, error, warning}}) => {
+const renderRadio = ({input, label, options, inline, meta: {touched, error, warning}}) => {
 
     const getValidationState = () => {
         return error ? 'error' : warning ? 'warning' : 'success'
@@ -13,9 +13,14 @@ const renderCheckbox = ({input, label, meta: {touched, error, warning}}) => {
     >
         <Col md={2}><ControlLabel>{label}</ControlLabel></Col>
         <Col md={5}>
-            <Checkbox
-                {...input}
-            >{label}</Checkbox>
+            {options.map((o, index) => (
+                <Radio inline={inline}
+                       key={index}
+                       {...input}
+                       value={o.value}
+                       checked={input.value === o.value}
+                >{o.label}</Radio>
+            ))}
         </Col>
         <Col md={5}>
             {touched &&
@@ -26,4 +31,4 @@ const renderCheckbox = ({input, label, meta: {touched, error, warning}}) => {
 }
 
 
-export default renderCheckbox
+export default renderRadio

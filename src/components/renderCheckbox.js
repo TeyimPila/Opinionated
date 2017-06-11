@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
+import {Col, ControlLabel, Checkbox, FormGroup, HelpBlock} from "react-bootstrap";
 
 const renderCheckbox = ({input, label, meta: {touched, error, warning}}) => {
 
@@ -15,7 +15,7 @@ const renderCheckbox = ({input, label, meta: {touched, error, warning}}) => {
         <Col md={5}>
             <Checkbox
                 {...input}
-                type={type}
+                checked={input.value}
             >{label}</Checkbox>
         </Col>
         <Col md={5}>

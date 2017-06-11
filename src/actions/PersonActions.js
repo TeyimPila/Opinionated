@@ -3,6 +3,12 @@ import {
     PERSON_REQUEST,
     PERSON_SUCCESS,
     PERSON_FAILURE,
+    SAVE_PERSON_REQUEST,
+    SAVE_PERSON_SUCCESS,
+    SAVE_PERSON_FAILURE,
+    DELETE_PERSON_REQUEST,
+    DELETE_PERSON_SUCCESS,
+    DELETE_PERSON_FAILURE,
     PEOPLE_ROOT_URL
 } from '../constants/PeopleConstants'
 
@@ -42,6 +48,88 @@ export const getPerson = (id) => (dispatch) => {
         })
         .catch(error => {
             dispatch(personError(error));
+        });
+};
+
+const deletePersonRequest = () => ({
+    type: DELETE_PERSON_REQUEST
+});
+
+const deletePersonSuccess = data => ({
+    type: DELETE_PERSON_SUCCESS,
+    payload: data
+});
+
+const deletePersonError = error => ({
+    type: DELETE_PERSON_FAILURE,
+    error
+});
+
+export const deletePerson = (id) => (dispatch) => {
+
+    //console.log("deletePerson ID:", id)
+
+    dispatch(deletePersonRequest());
+
+    let url = PEOPLE_ROOT_URL + 'api/People/' + id
+
+    //console.log("deletePerson URL:", url)
+
+    fetch(url, {method: 'DELETE', credentials: 'include'})
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            dispatch(deletePersonSuccess(data));
+        })
+        .catch(error => {
+            dispatch(deletePersonError(error));
+        });
+};
+
+const savePersonRequest = () => ({
+    type: SAVE_PERSON_REQUEST
+});
+
+const savePersonSuccess = data => ({
+    type: SAVE_PERSON_SUCCESS,
+    payload: data
+});
+
+const savePersonError = error => ({
+    type: SAVE_PERSON_FAILURE,
+    error
+});
+
+export const savePerson = (values) => (dispatch) => {
+
+    //console.log("savePerson values:", values)
+
+    dispatch(savePersonRequest());
+
+    let url = PEOPLE_ROOT_URL + 'api/People/' + values.ID
+
+    //console.log("savePerson URL:", url)
+    let dat = JSON.stringify(values, null, 2)
+    fetch(url, {
+        method: 'PUT',
+        body: dat,
+        headers: new Headers({'content-type': 'application/json'}),
+        credentials: 'include'})
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            dispatch(savePersonSuccess(data));
+        })
+        .catch(error => {
+            dispatch(savePersonError(error));
         });
 };
 

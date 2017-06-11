@@ -1,23 +1,38 @@
-
 import React from 'react'
-import {Col, Row} from "react-bootstrap";
+import {Col, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
 
 const renderField = ({input, label, type, meta: {touched, error, warning}}) => {
 
-    return <Row className="show-grid">
-        <Col md={2}>
-            <label>{label}</label>
-        </Col>
+    const getValidationState = () => {
+        return error ? 'error' : warning ? 'warning' : 'success'
+    }
+
+    const fb = (type) => {
+        if( type === 'text' || type === 'number' || type === 'email' || type === 'date')
+            return true
+        else
+            return false
+    }
+
+    return <FormGroup className="show-grid row"
+                      controlId="formBasicText"
+                      validationState={getValidationState()}
+    >
+        <Col md={2}><ControlLabel>{label}</ControlLabel></Col>
         <Col md={5}>
-            {type === 'textarea' ? <textarea className="form-control" {...input} placeholder={label}/> :
-                <input className="form-control" {...input} placeholder={label} type={type}/>}
+            <FormControl
+                {...input}
+                type={type}
+                placeholder={label}
+            />
+            {fb(type) && <FormControl.Feedback/>}
         </Col>
         <Col md={5}>
             {touched &&
-            ((error && <span style={{fontWeight: "bold", color: 'red'}}>{error}</span>) ||
-                (warning && <span style={{fontWeight: "bold", color: 'darkorange'}}>{warning}</span>))}
+            ((error && <HelpBlock>{error}</HelpBlock>) ||
+                (warning && <HelpBlock>{warning}</HelpBlock>))}
         </Col>
-    </Row>
+    </FormGroup>
 }
 
 
