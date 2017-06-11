@@ -3,6 +3,9 @@ import {
     PERSON_REQUEST,
     PERSON_SUCCESS,
     PERSON_FAILURE,
+    ADD_PERSON_REQUEST,
+    ADD_PERSON_SUCCESS,
+    ADD_PERSON_FAILURE,
     SAVE_PERSON_REQUEST,
     SAVE_PERSON_SUCCESS,
     SAVE_PERSON_FAILURE,
@@ -130,6 +133,49 @@ export const savePerson = (values) => (dispatch) => {
         })
         .catch(error => {
             dispatch(savePersonError(error));
+        });
+};
+
+const addPersonRequest = () => ({
+    type: ADD_PERSON_REQUEST
+});
+
+const addPersonSuccess = data => ({
+    type: ADD_PERSON_SUCCESS,
+    payload: data
+});
+
+const addPersonError = error => ({
+    type: ADD_PERSON_FAILURE,
+    error
+});
+
+export const addPerson = (values) => (dispatch) => {
+
+    //console.log("addPerson values:", values)
+
+    dispatch(addPersonRequest());
+
+    let url = PEOPLE_ROOT_URL + 'api/People/'
+
+    //console.log("addPerson URL:", url)
+    let dat = JSON.stringify(values, null, 2)
+    fetch(url, {
+        method: 'POST',
+        body: dat,
+        headers: new Headers({'content-type': 'application/json'}),
+        credentials: 'include'})
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res.json();
+        })
+        .then(data => {
+            dispatch(addPersonSuccess(data));
+        })
+        .catch(error => {
+            dispatch(addPersonError(error));
         });
 };
 

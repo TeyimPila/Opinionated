@@ -2,6 +2,9 @@ import {
     PERSON_REQUEST,
     PERSON_SUCCESS,
     PERSON_FAILURE,
+    ADD_PERSON_REQUEST,
+    ADD_PERSON_SUCCESS,
+    ADD_PERSON_FAILURE,
     SAVE_PERSON_REQUEST,
     SAVE_PERSON_SUCCESS,
     SAVE_PERSON_FAILURE,
@@ -51,6 +54,24 @@ function personReducer (state = initialState, action) {
                 person: action.payload
             };
         case SAVE_PERSON_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.error
+            };
+        case ADD_PERSON_REQUEST:
+            return {
+                ...state,
+                isFetching: true,
+                error: null
+            };
+        case ADD_PERSON_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                person: null
+            };
+        case ADD_PERSON_FAILURE:
             return {
                 ...state,
                 isFetching: false,

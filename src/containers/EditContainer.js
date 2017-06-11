@@ -88,6 +88,7 @@ class EditContainer extends Component {
 
         return (
             <div>
+                <h3>Find & Edit View</h3>
                 <Label>Find a Person:</Label>
                 <AsyncTypeahead
                     ref="AsyncTypeahead"
@@ -95,7 +96,7 @@ class EditContainer extends Component {
                     onSearch={this.handleSearch}
                     onChange={this.onSelectionChanged}
                     options={this.state.options}
-                    placeholder="Search for a Person by name ..."
+                    placeholder="Search for a Person by Partial First or Last Name ..."
                     useCache={false}
                     emptyLabel="No matches found"
                     minLength={3}
@@ -112,9 +113,11 @@ class EditContainer extends Component {
                 {person && <div><MyForm
                     initialValues={person}
                     onSubmit={this.onSave}
-                    onDelete={this.onDelete}/><ShowValues/></div>}
+                    onDelete={this.onDelete}/>
 
-                <Link to="/">Back</Link>
+                    <ShowValues/></div>}
+
+                <Link to="/">Home</Link>
             </div>
         )
     }

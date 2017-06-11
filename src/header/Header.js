@@ -27,8 +27,11 @@ const Header = () => (
                     <LinkContainer to="/people">
                         <MenuItem>People Search</MenuItem>
                     </LinkContainer>
+                    <LinkContainer to="/add">
+                        <MenuItem>Add Person</MenuItem>
+                    </LinkContainer>
                     <LinkContainer to="/edit">
-                        <MenuItem>Edit Form</MenuItem>
+                        <MenuItem>Find & Edit Person</MenuItem>
                     </LinkContainer>
                 </NavDropdown>
 

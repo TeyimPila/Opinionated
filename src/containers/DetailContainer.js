@@ -6,9 +6,7 @@ import {bindActionCreators} from 'redux';
 
 import {getPerson} from '../actions/PersonActions'
 
-import ShowResults from "../components/ShowResults";
 import MyForm from "../components/MyForm";
-import ShowValues from "../components/ShowValues";
 
 class DetailContainer extends Component {
 
@@ -32,10 +30,11 @@ class DetailContainer extends Component {
 
         return (
             <div>
-                <MyForm initialValues={person} onSubmit={ShowResults}/>
-                <ShowValues/>
-                <Link to="/">Back</Link>
-            </div>
+                <h3>Details View</h3>
+                <MyForm initialValues={person} readonly={true}/>
+                <Link to="/">Home</Link> {' '}
+                {person && <Link to="/edit/{person.ID}">Edit</Link>}
+           </div>
         )
     }
 }

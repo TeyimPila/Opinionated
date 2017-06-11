@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 const ShowValues = (props) => {
     const style = {
         fontWeight: "bold",
-        color: 'blue',
+        color: '#141887',
     }
 
     const tablestyle = {
@@ -55,6 +55,9 @@ const ShowValues = (props) => {
     }
 
     return <div className="well well-sm" style={style}>
+        <h3>This page is independent of the form</h3>
+        <p>It exists simple to show how the Values, Warnings and Errors can be accessed</p>
+        <p>Most of the fields have some validations or warning triggers, see the code in MyForm</p>
         <Values/>
         <Succeeded/>
         <Warnings/>

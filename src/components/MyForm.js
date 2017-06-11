@@ -18,7 +18,7 @@ const notsteve = value => value === 'Steve' ? 'Hmmm Steve' : undefined
 
 
 const isdate = value => value && new Date(value) instanceof Date ? undefined : 'Not a date'
-const inpast = value => value && new Date(value) < now ? undefined : 'Must be in the past'
+//const inpast = value => value && new Date(value) < now ? undefined : 'Must be in the past'
 
 const maxLength = max => value =>
     value && value.length > max ? `Must be ${max} characters or less` : undefined
@@ -39,6 +39,7 @@ const aol = value =>
 
 const noweed = value => value === 'Weed' ? 'Say no to drugs mmmkay' : undefined
 
+const toowordy = value => countWords(value) > 100 ? 'Too wordy' : undefined
 
 function countWords(str) {
     if(!str)
@@ -47,7 +48,6 @@ function countWords(str) {
         return str.trim().split(/\s+/).length;
 }
 
-const toowordy = value => countWords(value) > 3 ? 'Too wordy' : undefined
 
 
 const validate = (values) => {
@@ -72,7 +72,7 @@ const licences = [
 
 const MyForm = (props) => {
 
-    const {handleSubmit, onDelete, pristine, reset, submitting} = props
+    const {handleSubmit, onDelete, pristine, reset, submitting, adding, readonly} = props
     return (
         <div className="well well-sm">
             <Form horizontal onSubmit={handleSubmit}>
@@ -104,7 +104,7 @@ const MyForm = (props) => {
                     />
                     <Field name="StartDate" type="date" label="Start Date"
                            component={renderField}
-                           validate={[required, isdate, inpast]}
+                           validate={[required, isdate]}
                            format={(value) => value.substring(0, 10)}
                     />
                     <Field name="Age" type="number" label="Age"
@@ -145,14 +145,15 @@ const MyForm = (props) => {
                     />
 
 
-                    <Field name="Created" type="date" label="Created Date"
+                    {!adding && <Field name="Created" type="date" label="Created Date"
                            component={renderStatic}
-                    />
+                    />}
 
                     <Row className="show-grid">
                         <br/>
                     </Row>
-                    <Row className="show-grid">
+
+                    {!adding && !readonly && <Row className="show-grid">
                         <Col md={2}>
                             {' '}
                         </Col>
@@ -165,7 +166,20 @@ const MyForm = (props) => {
                             {' '}
                             <Button bsStyle="danger" type="button" bsSize="xsmall" disabled={submitting} onClick={onDelete}>Delete</Button>
                         </Col>
-                    </Row>
+                    </Row>}
+                    {adding && <Row className="show-grid">
+                        <Col md={2}>
+                            {' '}
+                        </Col>
+                        <Col md={10}>
+                            <Button bsStyle="primary" bsSize="xsmall" type="submit"
+                                    disabled={submitting}>Save</Button>
+                            {' '}
+                            <Button type="button" bsSize="xsmall" disabled={pristine || submitting} onClick={reset}>Clear
+                                Values</Button>
+                            {' '}
+                        </Col>
+                    </Row>}
                 </Grid>
 
 

@@ -22,7 +22,7 @@ const PeopleContainer = (props) => {
         <div>
             <PeopleForm onSubmit={getPeople}/>
             <PeopleResults people={people}/>
-            <Link to="/">Back</Link>
+            <Link to="/">Home</Link>
         </div>
     );
 }
