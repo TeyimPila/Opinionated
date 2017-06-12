@@ -13,7 +13,7 @@ class DetailContainer extends Component {
 
     componentWillMount() {
 
-        console.log("componentWillMount", this.props.match.params)
+        //console.log("componentWillMount", this.props.match.params)
 
         let id = this.props.match.params.id
         if (id) {

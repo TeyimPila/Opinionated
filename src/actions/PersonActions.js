@@ -12,8 +12,17 @@ import {
     DELETE_PERSON_REQUEST,
     DELETE_PERSON_SUCCESS,
     DELETE_PERSON_FAILURE,
+    CLEAR_PERSON,
     PEOPLE_ROOT_URL
 } from '../constants/PeopleConstants'
+
+const clearPersonRequest = () => ({
+    type: CLEAR_PERSON
+});
+
+export const clearPerson = () => (dispatch) => {
+    dispatch(clearPersonRequest());
+}
 
 const personRequest = () => ({
     type: PERSON_REQUEST
@@ -31,13 +40,13 @@ const personError = error => ({
 
 export const getPerson = (id) => (dispatch) => {
 
-    console.log("getPerson ID:", id)
+    //console.log("getPerson ID:", id)
 
     dispatch(personRequest());
 
     let url = PEOPLE_ROOT_URL + 'gp/' + id
 
-    console.log("getPerson URL:", url)
+    //console.log("getPerson URL:", url)
 
     fetch(url, {credentials: 'include'})
         .then(res => {
@@ -78,7 +87,7 @@ export const deletePerson = (id) => (dispatch) => {
 
     //console.log("deletePerson URL:", url)
 
-    fetch(url, {method: 'DELETE', credentials: 'include'})
+    return fetch(url, {method: 'DELETE', credentials: 'include'})
         .then(res => {
             if (!res.ok) {
                 throw new Error(res.statusText);
@@ -160,7 +169,7 @@ export const addPerson = (values) => (dispatch) => {
 
     //console.log("addPerson URL:", url)
     let dat = JSON.stringify(values, null, 2)
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
         body: dat,
         headers: new Headers({'content-type': 'application/json'}),
@@ -173,6 +182,7 @@ export const addPerson = (values) => (dispatch) => {
         })
         .then(data => {
             dispatch(addPersonSuccess(data));
+            return data;
         })
         .catch(error => {
             dispatch(addPersonError(error));

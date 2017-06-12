@@ -13,7 +13,6 @@ class AddContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            saved: false,
             id: 0,
         }
     }
@@ -21,18 +20,20 @@ class AddContainer extends Component {
     onSave = (values) => {
         //console.log("Save called with values:", JSON.stringify(values, null, 2))
         this.props.addPerson(values)
-        this.setState({saved: true})
+            .then((person) => {
+                this.props.history.push('/edit/' + person.ID)
+            })
+
     }
 
     fmt = (dt) => {
         var yyyy = dt.getFullYear();
         var mm = dt.getMonth() < 9 ? "0" + (dt.getMonth() + 1) : (dt.getMonth() + 1); // getMonth() is zero-based
-        var dd  = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
+        var dd = dt.getDate() < 10 ? "0" + dt.getDate() : dt.getDate();
         return "".concat(yyyy).concat('-').concat(mm).concat('-').concat(dd);
     }
 
     render = () => {
-        const saved = this.state.saved
 
         const created = new Date()
         const now = new Date()
@@ -55,14 +56,14 @@ class AddContainer extends Component {
 
         return (
             <div>
-                {!saved && <div><MyForm
+                <div><MyForm
                     initialValues={fields}
                     onSubmit={this.onSave}
-                    onDelete={() => {}}
+                    onDelete={() => {
+                    }}
                     adding={true}
-                    />
-                    <ShowValues/></div>}
-                {saved && <span>Saved successfully</span>}
+                />
+                    <ShowValues/></div>
 
                 <Link to="/">Home</Link>
             </div>
@@ -75,8 +76,7 @@ AddContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-    return {
-    };
+    return {};
 }
 
 const mapDispatchToProps = (dispatch) => {

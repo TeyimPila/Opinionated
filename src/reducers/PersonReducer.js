@@ -11,6 +11,7 @@ import {
     DELETE_PERSON_REQUEST,
     DELETE_PERSON_SUCCESS,
     DELETE_PERSON_FAILURE,
+    CLEAR_PERSON,
 } from '../constants/PeopleConstants';
 
 const initialState = {
@@ -21,6 +22,13 @@ const initialState = {
 
 function personReducer (state = initialState, action) {
     switch (action.type) {
+        case CLEAR_PERSON:
+            return {
+                ...state,
+                isFetching: false,
+                person: null,
+                error: null
+            };
         case PERSON_REQUEST:
             return {
                 ...state,
@@ -69,7 +77,7 @@ function personReducer (state = initialState, action) {
             return {
                 ...state,
                 isFetching: false,
-                person: null
+                person: action.payload
             };
         case ADD_PERSON_FAILURE:
             return {

@@ -40,7 +40,7 @@ const PeopleResults = (props) => {
             {
                 Header: 'ID',
                 accessor: 'ID',
-                width: 40,
+                width: 50,
                 Cell: ({value}) => (<span><Link to={`/details/${value}`}>{value}</Link></span>)
             },
             {

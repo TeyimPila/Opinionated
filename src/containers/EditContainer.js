@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import {AsyncTypeahead} from 'react-bootstrap-typeahead';
 import {Label} from "react-bootstrap";
 
-import {getPerson, deletePerson, savePerson} from '../actions/PersonActions'
+import {getPerson, deletePerson, savePerson, clearPerson} from '../actions/PersonActions'
 
 import MyForm from "../components/MyForm";
 import ShowValues from "../components/ShowValues";
@@ -19,6 +19,31 @@ class EditContainer extends Component {
         this.state = {
             options: [],
             id: 0,
+        }
+    }
+
+    componentWillMount() {
+
+        //console.log("componentWillMount", this.props.match.params)
+
+        let id = this.props.match.params.id
+        if (id) {
+            this.setState({id}, () => {this.props.getPerson(id)})
+        } else {
+            this.props.clearPerson()
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+
+        //console.log("componentWillReceiveProps", nextProps.match.params)
+        if(nextProps.match.params.id !== this.props.match.params.id) {
+            let id = nextProps.match.params.id
+            if (id) {
+                this.setState({id}, () => {this.props.getPerson(id)})
+            } else {
+                this.props.clearPerson()
+            }
         }
     }
 
@@ -50,8 +75,9 @@ class EditContainer extends Component {
             let sid = parseInt(selectedItems[0].ID, 10)
 
             if (sid) {
-                this.setState({id: sid},
-                this.props.getPerson(sid))
+                //this.setState({id: sid},
+                //this.props.getPerson(sid))
+                this.props.history.push('/edit/' + sid)
             }
         }
     }
@@ -60,24 +86,20 @@ class EditContainer extends Component {
     onSave = (values) => {
         //console.log("Save called with values:", JSON.stringify(values, null, 2))
         this.props.savePerson(values)
-        this.refs.AsyncTypeahead.getInstance().clear()
-        this.setState({id: 0})
     }
 
 
     onDelete = () => {
         let id = this.state.id
         if (id) {
-            confirm('Are you sure you want to delete Person ID ' + id + '?')
+            confirm(`Are you sure you want to delete ${this.props.person.FirstName} ${this.props.person.LastName}?`)
                 .then(() => {
-                    this.props.deletePerson(id)
+                    return this.props.deletePerson(id)
                 })
                 .then( () => {
-                    this.setState({id: 0, options: []})
-                })
-                .then(
                     this.refs.AsyncTypeahead.getInstance().clear()
-                )
+                    this.props.history.push('/edit')
+                })
         }
     }
 
@@ -127,6 +149,7 @@ EditContainer.propTypes = {
     getPerson: PropTypes.func.isRequired,
     deletePerson: PropTypes.func.isRequired,
     savePerson: PropTypes.func.isRequired,
+    clearPerson: PropTypes.func.isRequired,
     person: PropTypes.object,
 };
 
@@ -141,6 +164,7 @@ const mapDispatchToProps = (dispatch) => {
         getPerson: bindActionCreators(getPerson, dispatch),
         deletePerson: bindActionCreators(deletePerson, dispatch),
         savePerson: bindActionCreators(savePerson, dispatch),
+        clearPerson: bindActionCreators(clearPerson, dispatch),
     };
 }
 
