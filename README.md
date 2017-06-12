@@ -5,6 +5,10 @@ I have forgotten more than most people will ever know, but I get by and feed my 
 I may use the wrong terminology sometimes, but as long the code works who cares? 
 I look forward to any feedback that will help improve this project.
 
+## What is it?
+A complete working react application built around redux-form with a full implementation of react-bootstrap with validation and warnings working for every field type. 
+It comes with a SQL Server DB, a .NET MVC Web API and it all works!
+
 ## Rationale
 When I first started developing React applications I was not so happy with the un-opinionated nature of the thing.
 
