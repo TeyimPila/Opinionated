@@ -1,14 +1,17 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const Home = () => {
     return (
         <div className="container">
             <div className="jumbotron">
-                <h2>Welcome to Steve's Opinionated Starter</h2><small>Hope it helps you get started</small>
+                <h2>Welcome to Steve's Opinionated Starter Project</h2><small>I sincerely hope it helps you get started with the best of everything React</small>
             </div>
             <div className="well well-sm">
-                <p>This project provides everything you need to get started with:</p>
+                <h3>This project provides everything you need to get started with:</h3>
                 <ul>
+                    <li>SQL Server Database Setup</li>
+                    <li>.NET Web API 2 and Entity Framework</li>
                     <li>React</li>
                     <li>Redux</li>
                     <li>Redux Form WITH React-Bootstrap</li>
@@ -27,6 +30,8 @@ const Home = () => {
                         <li>Production</li>
                     </ul>
                 </ul>
+                <hr/>
+                <h4>See the <Link to="/about">About</Link> page to find out more about the aims of this project or <Link to="/steve">About Steve</Link> to find out more about Steve</h4>
             </div>
         </div>
     );

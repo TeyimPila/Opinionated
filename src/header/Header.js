@@ -39,6 +39,10 @@ const Header = () => (
                     <NavItem>About</NavItem>
                 </LinkContainer>
 
+                <LinkContainer to="/steve">
+                    <NavItem>Hmmm Steve</NavItem>
+                </LinkContainer>
+
                 <LinkContainer to="/contact">
                     <NavItem>Contact</NavItem>
                 </LinkContainer>

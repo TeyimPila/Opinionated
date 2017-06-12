@@ -4,6 +4,7 @@ import PeopleContainer from './containers/PeopleContainer'
 import DetailContainer from './containers/DetailContainer'
 import Home from './components/Home'
 import About from './components/About'
+import AboutSteve from './components/AboutSteve'
 import Contact from './components/Contact'
 import EditContainer from "./containers/EditContainer";
 import AddContainer from "./containers/AddContainer";
@@ -16,6 +17,7 @@ export const Routes = () => (
     <Route path="/add" component={AddContainer} />
     <Route path="/edit" component={EditContainer} />
     <Route path="/about" component={About} />
+    <Route path="/steve" component={AboutSteve} />
     <Route path="/contact" component={Contact} />
   </Switch>
 )
