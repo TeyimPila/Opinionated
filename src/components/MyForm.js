@@ -42,12 +42,11 @@ const noweed = value => value === 'Weed' ? 'Say no to drugs mmmkay' : undefined
 const toowordy = value => countWords(value) > 100 ? 'Too wordy' : undefined
 
 function countWords(str) {
-    if(!str)
+    if (!str)
         return 0
     else
         return str.trim().split(/\s+/).length;
 }
-
 
 
 const validate = (values) => {
@@ -72,7 +71,7 @@ const licences = [
 
 const MyForm = (props) => {
 
-    const {handleSubmit, onDelete, pristine, reset, submitting, adding, readonly} = props
+    const {handleSubmit, onDelete, pristine, reset, submitting, adding, readOnly} = props
     return (
         <div className="well well-sm">
             <Form horizontal onSubmit={handleSubmit}>
@@ -87,73 +86,85 @@ const MyForm = (props) => {
                            component={renderField}
                            validate={[required, maxLength15]}
                            warn={notsteve}
+                           readOnly={readOnly}
                     />
                     <Field name="LastName" type="text" label="Last Name"
                            component={renderField}
                            validate={[required, maxLength50]}
                            warn={notsteve}
+                           readOnly={readOnly}
                     />
                     <Field name="Email" type="email" label="Email"
                            component={renderField}
                            validate={email}
                            warn={aol}
+                           readOnly={readOnly}
                     />
                     <Field name="Solo" type="checkbox" label="Ready to fly solo?"
                            parse={(value, name) => value ? true : false}
                            component={renderCheckbox}
+                           readOnly={readOnly}
                     />
                     <Field name="StartDate" type="date" label="Start Date"
                            component={renderField}
                            validate={[required, isdate]}
                            format={(value) => value.substring(0, 10)}
+                           readOnly={readOnly}
                     />
                     <Field name="Age" type="number" label="Age"
                            component={renderField}
                            validate={[required, number, minValue18]}
                            warn={tooOld}
+                           readOnly={readOnly}
                     />
                     <Field name="Notes" label="Notes"
                            component={renderTextArea}
                            validate={[required]}
                            warn={[toowordy]}
+                           readOnly={readOnly}
                     />
 
-                    <Field name="Gender" type="select"  label="Gender"
+                    <Field name="Gender" type="select" label="Gender"
                            component={renderSelect}
-                           validate={[required]}>
+                           validate={[required]}
+                           readOnly={readOnly}
+                    >
                         <option></option>
-                        <option >Male</option>
-                        <option >Female</option>
-                        <option >Trans</option>
-                        <option >Fluid</option>
-                        <option >Experimenting</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Trans</option>
+                        <option>Fluid</option>
+                        <option>Experimenting</option>
                     </Field>
 
-                    <Field name="Plane" type="select"  label="Choose Plane"
+                    <Field name="Plane" type="select" label="Choose Plane"
                            component={renderSelect}
-                           validate={[required, noweed]}>
+                           validate={[required, noweed]}
+                           readOnly={readOnly}
+                    >
                         <option></option>
-                        <option >Cessna</option>
-                        <option >LearJet</option>
-                        <option >747</option>
-                        <option >Weed</option>
+                        <option>Cessna</option>
+                        <option>LearJet</option>
+                        <option>747</option>
+                        <option>Weed</option>
                     </Field>
 
                     <Field name="Licence" component={renderRadio} label="Licence type"
-                        options={licences}
+                           options={licences}
                            inline
+                           readOnly={readOnly}
                     />
 
 
                     {!adding && <Field name="Created" type="date" label="Created Date"
-                           component={renderStatic}
+                                       component={renderStatic}
                     />}
 
                     <Row className="show-grid">
                         <br/>
                     </Row>
 
-                    {!adding && !readonly && <Row className="show-grid">
+                    {!adding && !readOnly && <Row className="show-grid">
                         <Col md={2}>
                             {' '}
                         </Col>
@@ -164,7 +175,8 @@ const MyForm = (props) => {
                             <Button type="button" bsSize="xsmall" disabled={pristine || submitting} onClick={reset}>Clear
                                 Values</Button>
                             {' '}
-                            <Button bsStyle="danger" type="button" bsSize="xsmall" disabled={submitting} onClick={onDelete}>Delete</Button>
+                            <Button bsStyle="danger" type="button" bsSize="xsmall" disabled={submitting}
+                                    onClick={onDelete}>Delete</Button>
                         </Col>
                     </Row>}
                     {adding && <Row className="show-grid">

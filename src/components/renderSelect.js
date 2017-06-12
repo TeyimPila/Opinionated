@@ -1,7 +1,7 @@
 import React from 'react'
 import {Col, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
 
-const renderSelect = ({input, label, children, meta: {touched, error, warning}}) => {
+const renderSelect = ({input, label, children, meta: {touched, error, warning}, ...rest}) => {
 
     const getValidationState = () => {
         return error ? 'error' : warning ? 'warning' : 'success'
@@ -16,6 +16,7 @@ const renderSelect = ({input, label, children, meta: {touched, error, warning}})
             <FormControl
                 componentClass="select"
                 {...input}
+                {...rest}
                 children={ children }
             />
             <FormControl.Feedback/>

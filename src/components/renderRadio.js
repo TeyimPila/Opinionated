@@ -1,7 +1,7 @@
 import React from 'react'
 import {Col, ControlLabel, Radio, FormGroup, HelpBlock} from "react-bootstrap";
 
-const renderRadio = ({input, label, options, inline, meta: {touched, error, warning}}) => {
+const renderRadio = ({input, label, options, inline, meta: {touched, error, warning}, ...rest}) => {
 
     const getValidationState = () => {
         return error ? 'error' : warning ? 'warning' : 'success'
@@ -17,6 +17,7 @@ const renderRadio = ({input, label, options, inline, meta: {touched, error, warn
                 <Radio inline={inline}
                        key={index}
                        {...input}
+                       {...rest}
                        value={o.value}
                        checked={input.value === o.value}
                 >{o.label}</Radio>

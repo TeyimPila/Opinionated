@@ -1,7 +1,7 @@
 import React from 'react'
 import {Col, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
 
-const renderField = ({input, label, type, meta: {touched, error, warning}}) => {
+const renderField = ({input, label, type, meta: {touched, error, warning}, ...rest}) => {
 
     const getValidationState = () => {
         return error ? 'error' : warning ? 'warning' : 'success'
@@ -22,6 +22,7 @@ const renderField = ({input, label, type, meta: {touched, error, warning}}) => {
         <Col md={5}>
             <FormControl
                 {...input}
+                {...rest}
                 type={type}
                 placeholder={label}
             />

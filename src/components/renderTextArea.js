@@ -1,7 +1,7 @@
 import React from 'react'
 import {Col, ControlLabel, FormControl, FormGroup, HelpBlock} from "react-bootstrap";
 
-const renderTextArea = ({input, label, meta: {touched, error, warning}}) => {
+const renderTextArea = ({input, label, meta: {touched, error, warning}, ...rest}) => {
 
     const getValidationState = () => {
         return error ? 'error' : warning ? 'warning' : 'success'
@@ -15,6 +15,7 @@ const renderTextArea = ({input, label, meta: {touched, error, warning}}) => {
         <Col md={5}>
             <FormControl
                 {...input}
+                {...rest}
                 componentClass="textarea"
                 placeholder={label}
             />
