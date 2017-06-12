@@ -1,7 +1,7 @@
 import React from 'react'
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 import {NavLink} from 'react-router-dom'
-import {LinkContainer, IndexLinkContainer} from '../react-router-bootstrap-v4'
+import {LinkContainer, IndexLinkContainer} from 'react-router-bootstrap'
 import st33v from '../st33v.png'
 import './header.css'
 
