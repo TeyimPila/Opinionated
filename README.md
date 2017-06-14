@@ -1,31 +1,34 @@
 # Steve's Opinionated React Project
 ## or Getting Started in a Hurry!
-Disclaimer: I'm not an academic. I'm what you might call a 'Journeyman Programmer'. 
-I have forgotten more than most people will ever know, but I get by and feed my family. 
-I may use the wrong terminology sometimes, but as long the code works who cares? 
-I look forward to any feedback that will help improve this project.
+Disclaimer: I'm not an academic, so there may be some issues with this code. I look forward to any feedback that will help improve this project.
 
 ## What is it?
-A complete working react application built around redux-form with a full implementation of react-bootstrap with validation and warnings working for every field type. 
-It comes with a SQL Server DB, a .NET MVC Web API and it all works!
+An 'opinionated' starter kit/tutorial in the form of a complete working react application built around redux-form with a full implementation of react-bootstrap with validation and warnings working for every field type. 
+It comes with a SQL Server DB, a .NET MVC Web API and uses:
+
+* React
+* Bootstrap 3 
+* React Bootstrap 
+* React Router
+* React Router Bootstrap
+* Redux 
+* React Redux 
+* Redux Form 
+* Redux Thunk 
+* React Router Dom 
+* React Spinner 
+* React Table 
+* React Bootstrap Typeahead 
+* React Confirm
 
 ## Rationale
-When I first started developing React applications I was not so happy with the un-opinionated nature of the thing.
+When I first started developing React applications I was not so happy with the un-opinionated nature of the thing. What I would have really liked was a starter kit that had the lot.
 
-The learning curve is like a cliff face. Every time I thought I was making any progress at all, 
-I would realise I was on the wrong track, getting nowhere or simply lose my grip and fall off.
+The learning curve is like a cliff face. Once I got a handle on it, I decided that I should pull together a complete real-world-ish example, 
+starting with a db, a matching Web API and finally a complete and working React app with all of the major components you would need to include to do anything meaningful.
 
-Once I got a handle on it, I decided that I should pull together a complete real-world-ish example, starting with a db, a matching Web API and finally a complete and working React app with all of the major components you would need to include to do anything meaningful.
-
-I work in a 'Microsoft Shop', where the entire technology stack has (until now) been almost exclusively Microsoft. 
-
-That implies that SQL Server databases are prevalent (we have over 40 of them, replicated over 3 environments; Development, Staging and Production), and all of our projects code would be developed in Visual Studio.
-
-Given that both SQL Server (and the Management Studio) and Visual Studio (Community Edition 2017) are free tools, there is no reason not to use them for this project.
-
-BTW: I don't care what the haters say, I love Microsoft tools. They are free, well supported and I have earned a ton of money using them as an employee of the various companies that could bear to have me around.
-
-To use all of the components I have provided you will need SQL Server and Visual Studio installed. There are a lot of getting started tools out there, so I'm not going to cover installing the tools.
+To use all of the components I have provided you will need SQL Server and Visual Studio installed. Otherwise the app will run but nothing will work. You may need to change the url in env.local.
+There are a lot of getting started tutorials for them out there, so I'm not going to cover installing the tools.
  
 ## Database
 The db for this project is very simple.
@@ -321,5 +324,5 @@ package.json:
     "eject": "react-scripts eject"
 ```
 
-
+Have fun with it!
 
