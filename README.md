@@ -1,10 +1,12 @@
 # Steve's Opinionated React Project
 ## or Getting Started in a Hurry!
-Disclaimer: I'm not an academic, so there may be some issues with this code. I look forward to any feedback that will help improve this project.
+Disclaimer: I'm not an academic, so you may see something that can be improved. I look forward to any feedback that will help improve this project.
 
 ## What is it?
-An 'opinionated' starter kit/tutorial in the form of a complete working react application built around redux-form with a full implementation of react-bootstrap with validation and warnings working for every field type. 
-It comes with a SQL Server DB, a .NET MVC Web API and uses:
+An 'opinionated' starter kit/tutorial in the form of a complete working react application built around redux-form with a full implementation of 
+react-bootstrap that showcases validation, warnings etc. working for every field type via a set off custom components.
+
+It comes with a SQL Server DB, a .NET MVC Web API (https://github.com/aikidoshi/db-vs-code-for-Opinionated) and uses:
 
 * React
 * Bootstrap 3 
@@ -22,14 +24,12 @@ It comes with a SQL Server DB, a .NET MVC Web API and uses:
 * React Confirm
 
 ## Rationale
-When I first started developing React applications I was not so happy with the un-opinionated nature of the thing. What I would have really liked was a starter kit that had the lot.
+When I first started developing React applications I was not so happy with the un-opinionated nature of the thing, what 
+I would have liked was a starter kit that had the lot.
 
-The learning curve is like a cliff face. Once I got a handle on it, I decided that I should pull together a complete real-world-ish example, 
-starting with a db, a matching Web API and finally a complete and working React app with all of the major components you would need to include to do anything meaningful.
+I decided that I should pull together a complete real-world-ish example, starting with a db, a matching Web API and 
+finally a complete and working React app with all of the major components you would need to include to do anything meaningful.
 
-To use all of the components I have provided you will need SQL Server and Visual Studio installed. Otherwise the app will run but nothing will work. You may need to change the url in env.local.
-There are a lot of getting started tutorials for them out there, so I'm not going to cover installing the tools.
- 
 ## Database
 The db for this project is very simple.
 
@@ -37,190 +37,15 @@ Create a new database called 'Members'. Create a new Login **at server level** c
 Set the password to be the same (in production you would use a generated key stored in a password vault)
 Set the password to **NOT** use policy, and **never** expire.
 
-Create the table.
-```T-SQL
-USE [Members]
-GO
-
-/****** Object:  Table [dbo].[People]    Script Date: 12/06/2017 12:14:28 ******/
-DROP TABLE [dbo].[People]
-GO
-
-/****** Object:  Table [dbo].[People]    Script Date: 12/06/2017 12:14:28 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE TABLE [dbo].[People](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[FirstName] [nvarchar](50) NOT NULL,
-	[LastName] [nvarchar](50) NOT NULL,
-	[Email] [nvarchar](250) NOT NULL,
-	[Solo] [bit] NOT NULL CONSTRAINT [DF_People_Solo]  DEFAULT ((0)),
-	[StartDate] [date] NOT NULL,
-	[Age] [int] NOT NULL,
-	[Notes] [nvarchar](1000) NOT NULL,
-	[Gender] [nvarchar](10) NOT NULL,
-	[Plane] [nvarchar](30) NOT NULL,
-	[Licence] [nvarchar](50) NOT NULL CONSTRAINT [DF_People_Night]  DEFAULT ((0)),
-	[Created] [datetime2](7) NOT NULL CONSTRAINT [DF_People_Created]  DEFAULT (getdate()),
- CONSTRAINT [PK_People] PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-```
-
-## Stored procedures:
-* GetPeople Supplies report data
-* GetPersonByID Return one person record using supplied ID
-* LookupNames Given a strin expression finds matching FirstName or LastName
-
-``` T-SQL
-USE [Members]
-GO
-
-/****** Object:  StoredProcedure [dbo].[LookupNames]    Script Date: 12/06/2017 12:16:47 ******/
-DROP PROCEDURE [dbo].[LookupNames]
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetPersonByID]    Script Date: 12/06/2017 12:16:47 ******/
-DROP PROCEDURE [dbo].[GetPersonByID]
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetPeople]    Script Date: 12/06/2017 12:16:47 ******/
-DROP PROCEDURE [dbo].[GetPeople]
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetPeople]    Script Date: 12/06/2017 12:16:47 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
--- =============================================
--- Author:		Steve Bond
--- Create date: 9th June 2017
--- Description:	Get people that match optional 
---				partial First or Last Name
--- =============================================
-CREATE PROCEDURE [dbo].[GetPeople] 
-	@F	nvarchar(50) = '',
-	@L	nvarchar(50) = ''
-
-AS
-BEGIN
-	
-	IF @F = NULL
-		SET @F = ''
-
-	IF @L = NULL
-		SET @L = ''
-
-	SET NOCOUNT ON;
-
-	SELECT [ID]
-		  ,[FirstName]
-		  ,[LastName]
-		  ,[Email]
-		  ,[Solo]
-		  ,CONVERT(varchar, [StartDate], 103) AS StartDate
-		  ,[Age]
-		  ,[Notes]
-		  ,[Gender]
-		  ,[Plane]
-		  ,[Licence]
-		  ,CONVERT(varchar, [Created], 103) + ' ' + CONVERT(varchar, [Created], 8) AS Created
-	  FROM [dbo].[People]
-	  WHERE (FirstName LIKE '%' + @F + '%' AND LastName LIKE '%' + @L + '%')
-
-END
-
-GO
-
-/****** Object:  StoredProcedure [dbo].[GetPersonByID]    Script Date: 12/06/2017 12:16:47 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
--- =============================================
--- Author:		Steve Bond
--- Create date: 10/06/2017
--- Description:	Get a Person by ID
--- =============================================
-CREATE PROCEDURE [dbo].[GetPersonByID]
-	@ID int = 0
-AS
-BEGIN
-	
-	IF @ID = NULL OR @ID = 0
-		RETURN -1
-
-	SET NOCOUNT ON;
-
-	SELECT [ID]
-		,[FirstName]
-		,[LastName]
-		,[Email]
-		,[Solo]
-		,[StartDate]
-		,[Age]
-		,[Notes]
-		,[Gender]
-		,[Plane]
-		,[Licence]
-		,[Created]
-	FROM [dbo].[People]
-	WHERE ID = @ID
-
-END
-
-GO
-
-/****** Object:  StoredProcedure [dbo].[LookupNames]    Script Date: 12/06/2017 12:16:47 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
--- =============================================
--- Author:		Steve Bond
--- Create date: 10/06/2017
--- Description:	Find matching names
--- =============================================
-CREATE PROCEDURE [dbo].[LookupNames] 
-	@EXP nvarchar(25) = ''
-AS
-BEGIN
-	
-	SET NOCOUNT ON;
-
-    SELECT CONVERT(varchar, ID) AS ID, FirstName + ' ' + LastName AS NAME
-	FROM People
-	WHERE (FirstName LIKE '%' + @EXP + '%' OR LastName LIKE '%' + @EXP + '%')
- 
-
-END
-
-GO
-
-```
-That's it for the db. Script some test data into the People table and test all of the stored procedures to make sure they work.
+Restore the database from the backup and read through the sample stored procedures.
 
 ## Web API
-The Web API has been setup such that a couple of functions are provided by the Entity Framework functionality built for you when you choose to build your controller that way.
+The Web API has been setup such that a couple of functions are provided by the Entity Framework functionality built for 
+you by Visual Studio when you choose to build your controller that way.
 Other hand crafted functions demonstrate how to have custom routing and parameters, using Stored Procedures in the db instead of Entity Framework.
 All functions are asynchronous by design.
 
-Create a new Web API project in Visual Studio:
+If you decide to create your own Web API project in Visual Studio:
 
 1. I used no authentication for this one, but at work - for the Intranet - I use Windows Authentication
 1. CORS - Use Tools->NuGet Package Manager->Manage NuGet Packages for Solution and browse for 'CORS'. Install Microsoft.AspNet.WebApi.Cors
@@ -237,49 +62,7 @@ Create a new Web API project in Visual Studio:
     In the Areas->Help Page->App_Start/HelpPageConfig.cs file uncomment the line 'config.SetDocumentationProvider(new XmlDocumentationProvider(HttpContext.Current.Server.MapPath("~/App_Data/MembersAPI.xml")));'
     Click on the MembersAPI project and go to Project->MembersAPI Properties
     On the Build Tab tick XML documentation file and set the name to 'APP_DATA\MembersAPI.xml'
-    In your controller create API functions documented as follows:
     
-``` WebAPI
-namespace MembersAPI.Controllers
-{
-    /// <summary>
-    /// This is a hand-crafted API class
-    /// </summary>
-    [EnableCors(origins: "*", headers: "*", methods: "*", SupportsCredentials = true)]
-    public class PController : ApiController
-    {
-        /// <summary>
-        /// Get people for reporting purposes using partials
-        /// </summary>
-        /// <param name="f">FirstName</param>
-        /// <param name="l">LastName</param>
-        /// <returns></returns>
-        [Route("p")]
-        [HttpGet()]
-        public async Task<IHttpActionResult> Get(string f = "", string l = "")
-        {
-            if (String.IsNullOrEmpty(f))
-                f = "";
-            if (String.IsNullOrEmpty(l))
-                l = "";
-
-            MembersEntities db = new MembersEntities();
-
-            var fParam = CreateParameter("F", f);
-            var lParam = CreateParameter("L", l);
-
-            List<GetPeople_Result> q = await db.Database.SqlQuery<GetPeople_Result>("GetPeople @F, @L", fParam, lParam).ToListAsync();
-
-            if (q == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(q);
-        }
-
-
-```
 
 ## Javascript Libraries and Components:
 On the javascript side I feel there are few choices to make if you want to acheive the sort of look and feel that this project exhibits.
@@ -302,6 +85,7 @@ I started with create-react-app and then added the following list of components,
 
 I use yarn for start and build, and git bash for my shell.
 
+To update the project to the latest you can delete the dependencies in package.json and then run this:
 ```
 yarn add bootstrap@3 react-bootstrap redux react-redux redux-form redux-thunk react-router react-router-bootstrap react-router-dom react-spinner react-table react-bootstrap-typeahead react-confirm`
 ```
