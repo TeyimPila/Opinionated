@@ -33,6 +33,9 @@ finally a complete and working React app with all of the major components you wo
 ## Database
 The db for this project is very simple.
 
+I created a script (database-script.sql) to make setup of the db easier. It will also add a lot of member records.
+
+The long way:
 Create a new database called 'Members'. Create a new Login **at server level** called 'MembersUser'. 
 Set the password to be the same (in production you would use a generated key stored in a password vault)
 Set the password to **NOT** use policy, and **never** expire.
