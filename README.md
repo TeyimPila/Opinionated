@@ -24,7 +24,7 @@ Libararies used:
 * React
 * Bootstrap 3 
 * React Bootstrap 
-* React Router
+* React Router 4
 * React Router Bootstrap
 * Redux 
 * React Redux 
