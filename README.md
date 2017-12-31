@@ -4,7 +4,7 @@ Disclaimer: I'm not an academic, so you may see something that can be improved. 
 
 ## What is it?
 An 'opinionated' starter kit/tutorial in the form of a complete working react application built around redux-form with a full implementation of 
-react-bootstrap that showcases validation, warnings etc. working for every field type via a set off custom components.
+react-bootstrap that showcases validation, warnings etc. working for every field type via a set of custom components.
 
 It comes with a SQL Server DB, a .NET MVC Web API (https://github.com/aikidoshi/db-vs-code-for-Opinionated) and uses:
 
