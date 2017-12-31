@@ -41,12 +41,12 @@ class DetailContainer extends Component {
 
 DetailContainer.propTypes = {
     getPerson: PropTypes.func.isRequired,
-    person: PropTypes.object
+    person: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
     return {
-        person: state.person.person
+        person: state.person.person,
     };
 }
 

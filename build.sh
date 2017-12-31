@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd /c/react/rim
+cd /c/react/opinionated
 
 rm -f -r build builddev buildstg buildprd
 

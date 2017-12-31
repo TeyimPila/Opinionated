@@ -6,6 +6,8 @@ import {connect} from 'react-redux';
 import { peopleSearch } from '../actions/PeopleActions';
 import PeopleResults from "../components/PeopleResults";
 import PeopleForm from "../components/PeopleForm";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 const PeopleContainer = (props) => {
 
@@ -17,11 +19,20 @@ const PeopleContainer = (props) => {
 
     }
 
-    const {people} = props;
+    const {isFetching, error, people} = props;
+
+
+
     return (
         <div>
             <PeopleForm onSubmit={getPeople}/>
-            <PeopleResults people={people}/>
+
+            {isFetching && <Loading /> }
+
+            {error && <Error msg={error.message} /> }
+
+            {people.length > 0 && <PeopleResults people={people}/> }
+
             <Link to="/">Home</Link>
         </div>
     );
@@ -29,12 +40,16 @@ const PeopleContainer = (props) => {
 
 PeopleContainer.propTypes = {
     peopleSearch: PropTypes.func.isRequired,
-    people: PropTypes.array
+    people: PropTypes.array,
+    isFetching: PropTypes.bool.isRequired,
+    error: PropTypes.object,
 };
 
 const mapStateToProps = (state) => {
     return {
-        people: state.people.people
+        people: state.people.people,
+        isFetching: state.people.isFetching,
+        error: state.people.error,
     };
 }
 
@@ -48,3 +63,4 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(PeopleContainer);
+

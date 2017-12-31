@@ -9,7 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
-
+// Remove these when you know your environments are being used properly
 console.log("process.env.NODE_ENV", process.env.NODE_ENV)
 console.log("process.env.REACT_APP_BUILD", process.env.REACT_APP_BUILD)
 console.log("process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL)

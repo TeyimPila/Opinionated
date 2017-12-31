@@ -19,7 +19,7 @@ const renderField = ({input, label, type, meta: {touched, error, warning}, ...re
                       validationState={getValidationState()}
     >
         <Col md={2}><ControlLabel>{label}</ControlLabel></Col>
-        <Col md={5}>
+        <Col md={6}>
             <FormControl
                 {...input}
                 {...rest}
@@ -28,7 +28,7 @@ const renderField = ({input, label, type, meta: {touched, error, warning}, ...re
             />
             {fb(type) && <FormControl.Feedback/>}
         </Col>
-        <Col md={5}>
+        <Col md={4}>
             {touched &&
             ((error && <HelpBlock>{error}</HelpBlock>) ||
                 (warning && <HelpBlock>{warning}</HelpBlock>))}

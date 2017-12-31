@@ -12,7 +12,7 @@ const renderTextArea = ({input, label, meta: {touched, error, warning}, ...rest}
                       validationState={getValidationState()}
     >
         <Col md={2}><ControlLabel>{label}</ControlLabel></Col>
-        <Col md={5}>
+        <Col md={6}>
             <FormControl
                 {...input}
                 {...rest}
@@ -21,7 +21,7 @@ const renderTextArea = ({input, label, meta: {touched, error, warning}, ...rest}
             />
             <FormControl.Feedback/>
         </Col>
-        <Col md={5}>
+        <Col md={4}>
             {touched &&
             ((error && <HelpBlock>{error}</HelpBlock>) ||
                 (warning && <HelpBlock>{warning}</HelpBlock>))}
