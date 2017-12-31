@@ -11,9 +11,10 @@ An 'opinionated' starter kit/tutorial in the form of a complete working react ap
 * Support for multiple build environments
 
 The DB includes a couple of parameterised stored procedures
+
 The API shows a couple of different ways of using them; either letting Entity Framework do the hard lifting or by hand coding them from 'empty' API controllers. It also shows how to fully document the API and resolve CORS issues.
-The React application includes redux, redux-form, bootstrap  and a redux-form with a full implementation of 
-react-bootstrap that showcases validation, warnings etc. working for every field type via a set of custom components.
+
+The React application includes react-router 4, redux, redux-form using bootstrap and react-bootstrap that showcases validation, warnings etc. working for every field type via a set of custom components.
 It has a working NavBar showing how to do dropdowns etc. and demonstrates use of the react-bootstrap-typeahead component and react-table.
 
 It includes sample actions, reducers, Chrome dev tools, solutions for all issues related to CORS, URL rewriting and numerous other little nasties that take time to put in place.
