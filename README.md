@@ -141,10 +141,12 @@ To update the project to the latest use 'yarn outdated' to find out what is out 
 
 ## Multiple Build Environments
 Support for multiple build environments is provided through .env files.
-local.env is used for the local development environment, but for published files to dev, stg and prd I have 3 different files.
-Each .env file is pulled in by a session variable. They only really contain the url of the api server for that environment. Local.env uses localhost, bt the others use cnames on the domain.
-Build.sh is used ('sh build.sh') to build all 3 environments for release, the rationale being that minor changes made to the application will need to be deployed into all 3 environments so I mayas well automate the building of them.
-It works for me, you might not like it.
+
+local.env is used for the local development environment (either on localhost when Visual Studio is running the API or in IIS post deployment to dev server).
+
+For published files to dev, stg and prd I have 3 different .env files that use different API URLs in each environment.
+
+Each .env file is pulled in by a session variable in the build.sh file. 
 
 ```json
 package.json:
@@ -157,5 +159,13 @@ package.json:
     "eject": "react-scripts eject"
 ```
 
-Have fun with it!
+Build.sh is used (in a bash shell run 'sh build.sh') to build all 3 environments for release, the rationale being that 
+minor changes made to the application will need to be deployed into all 3 environments so I may as well automate the building of them.
+
+It works for me, you might not like it.
+
+Have fun with it! Hope it saves you some time or helps solve an issue here or there.
+
+Steve Bond
+aikidoshi@hotmail.com
 
