@@ -17,7 +17,10 @@ const PeopleContainer = (props) => {
     }
     const {isFetching, error, people} = props;
     return (
-        <div>
+        <div className="well well-sm">
+
+            <h3>This form allows one to search for members based on partial First or Last Name ...</h3>
+
             <PeopleForm onSubmit={getPeople}/>
 
             {isFetching && <Loading /> }
@@ -26,7 +29,8 @@ const PeopleContainer = (props) => {
 
             {people.length > 0 && <PeopleResults people={people}/> }
 
-            <Link to="/">Home</Link>
+            <hr/>
+            <h4><Link to="/">Home</Link></h4>
         </div>
     );
 }

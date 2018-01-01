@@ -16,7 +16,7 @@ const PeopleResults = (props) => {
 
     if (!props.isFetching && !props.people) {
         return (
-            <div className="well">
+            <div className="well well-sm">
                 <h3>People Search Results</h3>
                 <div>Enter a partial first and/or last name and click Submit</div>
             </div>

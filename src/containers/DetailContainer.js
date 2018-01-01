@@ -32,7 +32,9 @@ class DetailContainer extends Component {
             <div>
                 <h3>Details View</h3>
                 <MyForm initialValues={person} readOnly={true}/>
-                <Link to="/">Home</Link> {' '}
+                <hr/>
+                <h4><Link to="/">Home</Link></h4>
+                {' '}
                 {person && <Link to={`/edit/${person.ID}`}>Edit</Link>}
            </div>
         )

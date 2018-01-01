@@ -99,8 +99,9 @@ class EditContainer extends Component {
 
         const {person} = this.props;
         return (
-            <div>
+            <div className="well well-sm">
                 <h3>Find & Edit View</h3>
+                <p>This form exists to demo the react-bootstrap-typeahead and supporting API/stored procedures</p>
                 <Label>Find a Person:</Label>
                 <AsyncTypeahead
                     ref="AsyncTypeahead"
@@ -122,14 +123,17 @@ class EditContainer extends Component {
                     )}
                 />
 
-                {person && <div><MyForm
+                {person && <div className="well well-sm"><MyForm
                     initialValues={person}
                     onSubmit={this.onSave}
                     onDelete={this.onDelete}/>
 
+                    <hr/>
+
                     <ShowValues/></div>}
 
-                <Link to="/">Home</Link>
+                <hr/>
+                <h4><Link to="/">Home</Link></h4>
             </div>
         )
     }

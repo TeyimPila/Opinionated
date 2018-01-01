@@ -55,17 +55,23 @@ class AddContainer extends Component {
         }
 
         return (
-            <div>
-                <div><MyForm
+            <div className="well well-sm">
+                <h3>This form allows one to add a new member to the system</h3>
+                <p>There are some validation and warning rules provided ...</p>
+                <MyForm
                     initialValues={fields}
                     onSubmit={this.onSave}
                     onDelete={() => {
                     }}
                     adding={true}
                 />
-                    <ShowValues/></div>
 
-                <Link to="/">Home</Link>
+                <hr />
+
+                <ShowValues/>
+
+                <hr/>
+                <h4><Link to="/">Home</Link></h4>
             </div>
         )
     }

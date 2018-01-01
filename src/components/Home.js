@@ -31,7 +31,7 @@ const Home = () => {
                     </ul>
                 </ul>
                 <hr/>
-                <h4>See the <Link to="/about">About</Link> page to find out more about the aims of this project or <Link to="/steve">About Steve</Link> to find out more about Steve</h4>
+                <h4>See the <Link to="/about">About</Link> page to find out more about this project or <Link to="/contact">Contact</Link> to find out more about relevant contacts</h4>
             </div>
         </div>
     );
