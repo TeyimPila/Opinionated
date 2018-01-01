@@ -1,4 +1,6 @@
 import React from 'react'
+import moment from 'moment'
+
 import {Field, reduxForm} from 'redux-form'
 import {Form, Col, Grid, Row, Button} from "react-bootstrap";
 import renderField from './renderField'
@@ -7,11 +9,20 @@ import renderSelect from './renderSelect'
 import renderCheckbox from './renderCheckbox'
 import renderTextArea from './renderTextArea'
 import renderRadio from './renderRadio'
+import renderDatePicker from './renderDatePicker'
 
 //import { ControlLabel, FormControl, FormGroup, HelpBlock } from "react-bootstrap";
 
 const now = new Date()
 now.setHours(0, 0, 0, 0)
+
+const fmt = (dt) => {
+    // if it is a string that contains '/' then just return it
+    if(typeof(dt) === 'string' && dt.indexOf('/') > -1) {
+        return dt
+    }
+    return moment(dt).format("DD/MM/YYYY")
+}
 
 const required = value => value ? undefined : 'Required'
 const notsteve = value => value === 'Steve' ? 'Hmmm Steve' : undefined
@@ -105,11 +116,21 @@ const MyForm = (props) => {
                            component={renderCheckbox}
                            readOnly={readOnly}
                     />
-                    <Field name="StartDate" type="date" label="Start Date"
-                           component={renderField}
-                           validate={[required, isdate]}
-                           format={(value) => value.substring(0, 10)}
-                           readOnly={readOnly}
+
+                    <Field
+                        name="StartDate"
+                        label="Start Date"
+                        inputValueFormat="DD/MM/YYYY"
+                        dateFormat="YYYY-MM-DD"
+                        // dateFormatCalendar="dddd"
+                        // fixedHeight
+                        // showMonthDropdown
+                        // showYearDropdown
+                        // dropdownMode="select"
+                        //normalize={value => (value ? moment(value).format('YYYY-MM-DD') : null)}
+                        component={renderDatePicker}
+                        validate={[required, isdate]}
+                        format={(value) => fmt(value)}
                     />
                     <Field name="Age" type="number" label="Age"
                            component={renderField}
@@ -156,8 +177,9 @@ const MyForm = (props) => {
                     />
 
 
-                    {!adding && <Field name="Created" type="date" label="Created Date"
+                    {!adding && <Field name="Created" type="text" label="Created Date"
                                        component={renderStatic}
+                                       format={(value) => fmt(value)}
                     />}
 
                     <Row className="show-grid">

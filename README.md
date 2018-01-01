@@ -35,6 +35,7 @@ Libararies used:
 * React Table 
 * React Bootstrap Typeahead 
 * React Confirm
+* React DatePicker
 
 ## Rationale
 When I first started developing React applications I was not so happy with the un-opinionated nature of the thing, what 

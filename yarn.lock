@@ -4176,6 +4176,10 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
   dependencies:
     minimist "0.0.8"
 
+moment@^2.20.1:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -4645,6 +4649,10 @@ pkg-dir@^2.0.0:
 pluralize@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-4.0.0.tgz#59b708c1c0190a2f692f1c7618c446b052fd1762"
+
+popper.js@^1.12.5:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.13.0.tgz#e1e7ff65cc43f7cf9cf16f1510a75e81f84f4565"
 
 portfinder@^1.0.9:
   version "1.0.13"
@@ -5148,6 +5156,15 @@ react-confirm@^0.1.14:
   version "0.1.16"
   resolved "https://registry.yarnpkg.com/react-confirm/-/react-confirm-0.1.16.tgz#953ceec7ba736867226d7032aa01ab4a5da82438"
 
+react-datepicker@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-1.0.3.tgz#f639f22d09b6300c31c151de3699c70e18cef86c"
+  dependencies:
+    classnames "^2.2.5"
+    prop-types "^15.6.0"
+    react-onclickoutside "^6.6.3"
+    react-popper "^0.7.4"
+
 react-dev-utils@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-4.1.0.tgz#f6f436febd3f4eeb538490319b51c875c1e35bc5"
@@ -5213,6 +5230,10 @@ react-onclickoutside@^6.1.1:
   version "6.6.2"
   resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.6.2.tgz#8446f665460ffda1c68b7f3aeeea3a217bfdf18f"
 
+react-onclickoutside@^6.6.3:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.7.0.tgz#997a4d533114c9a0a104913638aa26afc084f75c"
+
 react-overlays@^0.7.0:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.7.3.tgz#e4caa690ce7cd7d40b2cf9cdc26356cddaf5a0e9"
@@ -5233,6 +5254,13 @@ react-overlays@^0.8.1:
     prop-types-extra "^1.0.1"
     react-transition-group "^2.2.0"
     warning "^3.0.0"
+
+react-popper@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.7.4.tgz#8649d539837e7c6f47bc9b24c9cf57a404e199a1"
+  dependencies:
+    popper.js "^1.12.5"
+    prop-types "^15.5.10"
 
 react-prop-types@^0.4.0:
   version "0.4.0"

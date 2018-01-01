@@ -12,17 +12,10 @@ import Error from "../components/Error";
 const PeopleContainer = (props) => {
 
     const getPeople = (vals) => {
-
-        //console.log("getPeople", vals)
-
         props.peopleSearch(vals)
 
     }
-
     const {isFetching, error, people} = props;
-
-
-
     return (
         <div>
             <PeopleForm onSubmit={getPeople}/>

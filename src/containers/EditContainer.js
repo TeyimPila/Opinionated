@@ -12,6 +12,7 @@ import MyForm from "../components/MyForm";
 import ShowValues from "../components/ShowValues";
 import {PEOPLE_ROOT_URL} from '../constants/PeopleConstants'
 import {confirm} from '../util/confirm';
+import { stringToDate } from "../util/date-funcs";
 
 class EditContainer extends Component {
     constructor(props) {
@@ -23,9 +24,6 @@ class EditContainer extends Component {
     }
 
     componentWillMount() {
-
-        //console.log("componentWillMount", this.props.match.params)
-
         let id = this.props.match.params.id
         if (id) {
             this.setState({id}, () => {this.props.getPerson(id)})
@@ -35,8 +33,6 @@ class EditContainer extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-
-        //console.log("componentWillReceiveProps", nextProps.match.params)
         if(nextProps.match.params.id !== this.props.match.params.id) {
             let id = nextProps.match.params.id
             if (id) {
@@ -52,7 +48,6 @@ class EditContainer extends Component {
             return;
         }
         let url = PEOPLE_ROOT_URL + 'lookup/' + query
-        //console.log("URL", url)
         fetch(url, {credentials: 'include'})
             .then(res => {
                 if (!res.ok) {
@@ -71,23 +66,20 @@ class EditContainer extends Component {
 
     onSelectionChanged = (selectedItems) => {
         if (selectedItems && selectedItems.length > 0) {
-
             let sid = parseInt(selectedItems[0].ID, 10)
-
             if (sid) {
-                //this.setState({id: sid},
-                //this.props.getPerson(sid))
                 this.props.history.push('/edit/' + sid)
             }
         }
     }
 
-
     onSave = (values) => {
-        //console.log("Save called with values:", JSON.stringify(values, null, 2))
-        this.props.savePerson(values)
+        let p = {...values}
+        if(p.StartDate.indexOf('/') > -1) {
+            p.StartDate = stringToDate(values.StartDate, "dd/MM/yyyy", "/")
+        }
+        this.props.savePerson(p)
     }
-
 
     onDelete = () => {
         let id = this.state.id
@@ -103,11 +95,9 @@ class EditContainer extends Component {
         }
     }
 
-
     render = () => {
 
         const {person} = this.props;
-
         return (
             <div>
                 <h3>Find & Edit View</h3>

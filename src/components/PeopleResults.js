@@ -1,37 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import Spinner from 'react-spinner'
-import 'react-spinner/react-spinner.css'
+import {withRouter} from 'react-router';
+import {Link} from 'react-router-dom'
 import ReactTable from "react-table";
 import 'react-table/react-table.css'
-import { Link } from 'react-router-dom'
+import Loading from "./Loading";
 
 
 const PeopleResults = (props) => {
 
-    if(!props.isFetching && !props.people) {
-        return (
-        <div className="well">
-            <h3>People Search Results</h3>
-            <div>Enter a partial first and/or last name and click Submit</div>
-        </div>
-        )
+    const showDetails = (s) => {
+        props.history.push(`/details/${s.ID}`)
     }
-    else if(props.isFetching) {
-        const style = {
-            height: 50,
-            width: 50,
-            backgroundColor: 'blue'
-        };
-        return (
 
+
+    if (!props.isFetching && !props.people) {
+        return (
             <div className="well">
-                <h3>Searching, please wait ...</h3>
-                <div style={style}>
-                    <Spinner />
-                </div>
+                <h3>People Search Results</h3>
+                <div>Enter a partial first and/or last name and click Submit</div>
             </div>
         )
+    }
+    else if (props.isFetching) {
+        return <Loading/>
     }
     else {
         const people = props.people
@@ -104,12 +96,22 @@ const PeopleResults = (props) => {
         return (
             <div className="well">
                 <h3>People Search Results</h3>
+                <p>Click on rows to edit the details or use the link in ID column</p>
                 <br/>
                 <ReactTable className="-striped"
                             data={people}
                             columns={columns}
                             defaultPageSize={5}
-
+                            getTdProps={(state, rowInfo, column, instance) => {
+                                return {
+                                    onClick: (e, handleOriginal) => {
+                                        if (rowInfo && rowInfo.row) {
+                                            showDetails(rowInfo.row)
+                                        }
+                                    }
+                                }
+                            }
+                            }
                 />
             </div>
         )
@@ -128,4 +130,4 @@ PeopleResults.defaultProps = {
     isFetching: false
 };
 
-export default PeopleResults;
+export default withRouter(PeopleResults)

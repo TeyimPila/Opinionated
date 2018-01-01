@@ -117,18 +117,11 @@ const savePersonError = error => ({
 });
 
 export const savePerson = (values) => (dispatch) => {
-
-    //console.log("savePerson values:", values)
-
     dispatch(savePersonRequest());
-
     let url = PEOPLE_ROOT_URL + 'api/People/' + values.ID
-
-    //console.log("savePerson URL:", url)
-    let dat = JSON.stringify(values, null, 2)
     fetch(url, {
         method: 'PUT',
-        body: dat,
+        body: values,
         headers: new Headers({'content-type': 'application/json'}),
         credentials: 'include'})
         .then(res => {
