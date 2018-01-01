@@ -89,6 +89,7 @@ If you decide to create your own Web API project in Visual Studio:
 1. Add the CORS decoration to the class. Note that in Production quality code you may want to be more specific about the origin and methods - this allows anything from anywhere!
 ```[EnableCors(origins: "*", headers: "*", methods: "*", SupportsCredentials = true)]```
 1. Add the following code to your global.asax.cs file:
+```
         public void Application_BeginRequest(object sender, EventArgs e)
         {
             if (Request.HttpMethod == "OPTIONS")
@@ -104,6 +105,7 @@ If you decide to create your own Web API project in Visual Studio:
                 httpApplication.CompleteRequest();
             }
         }
+```
 1. Document your API using the built-in document generator.
     In the Areas->Help Page->App_Start/HelpPageConfig.cs file uncomment the line 'config.SetDocumentationProvider(new XmlDocumentationProvider(HttpContext.Current.Server.MapPath("~/App_Data/MembersAPI.xml")));'
     Click on the MembersAPI project and go to Project->MembersAPI Properties
@@ -134,10 +136,8 @@ I started with create-react-app and then added the following list of components,
 
 I use yarn for start and build, and git bash for my shell.
 
-To update the project to the latest you can delete the dependencies in package.json and then run this:
-```
-yarn add bootstrap@3 react-bootstrap redux react-redux redux-form redux-thunk react-router react-router-bootstrap react-router-dom react-spinner react-table react-bootstrap-typeahead react-confirm`
-```
+To update the project to the latest use 'yarn outdated' to find out what is out of date.
+
 
 ## Multiple Build Environments
 Support for multiple build environments is provided through .env files.
