@@ -57,7 +57,8 @@ class AddContainer extends Component {
         return (
             <div className="well well-sm">
                 <h3>This form allows one to add a new member to the system</h3>
-                <p>There are some validation and warning rules provided ...</p>
+                <p>Note also how the entire form is passed into the ShowValues page via state</p>
+                <p>including the validation and warning message arrays ...</p>
                 <MyForm
                     initialValues={fields}
                     onSubmit={this.onSave}

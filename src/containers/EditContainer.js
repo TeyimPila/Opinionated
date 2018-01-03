@@ -100,29 +100,32 @@ class EditContainer extends Component {
         const {person} = this.props;
         return (
             <div className="well well-sm">
-                <h3>Find & Edit View</h3>
-                <p>This form exists to demo the react-bootstrap-typeahead and supporting API/stored procedures</p>
-                <Label>Find a Person:</Label>
-                <AsyncTypeahead
-                    ref="AsyncTypeahead"
-                    labelKey="NAME"
-                    onSearch={this.handleSearch}
-                    onChange={this.onSelectionChanged}
-                    options={this.state.options}
-                    placeholder="Search for a Person by Partial First or Last Name ..."
-                    useCache={false}
-                    emptyLabel="No matches found"
-                    minLength={3}
-                    searchText="Searching..."
-                    promptText="Type at least 3 chars to search"
-                    renderMenuItemChildren={(option, props, index) => (
-                        <div>
-                            <span>{option.ID}</span>{' '}
-                            <span>{option.NAME}</span>
-                        </div>
-                    )}
-                />
-
+                {!person && <div>
+                    <h3>Find & Edit View</h3>
+                    <p>This form exists to demo the react-bootstrap-typeahead and supporting API/stored procedures</p>
+                    <p>Note also how the entire form is passed into the ShowValues page via state</p>
+                    <p>including the validation and warning message arrays ...</p>
+                    <Label>Find a Person:</Label>
+                    <AsyncTypeahead
+                        ref="AsyncTypeahead"
+                        labelKey="NAME"
+                        onSearch={this.handleSearch}
+                        onChange={this.onSelectionChanged}
+                        options={this.state.options}
+                        placeholder="Search for a Person by Partial First or Last Name ..."
+                        useCache={false}
+                        emptyLabel="No matches found"
+                        minLength={3}
+                        searchText="Searching..."
+                        promptText="Type at least 3 chars to search"
+                        renderMenuItemChildren={(option, props, index) => (
+                            <div>
+                                <span>{option.ID}</span>{' '}
+                                <span>{option.NAME}</span>
+                            </div>
+                        )}
+                    />
+                </div>}
                 {person && <div className="well well-sm"><MyForm
                     initialValues={person}
                     onSubmit={this.onSave}

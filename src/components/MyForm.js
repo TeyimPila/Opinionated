@@ -79,9 +79,6 @@ const MyForm = (props) => {
         <div className="well well-sm">
             <Form horizontal onSubmit={handleSubmit}>
                 <Grid>
-                    <Row className="show-grid">
-                        <hr/>
-                    </Row>
                     <Field name="ID" label="ID"
                            component={renderStatic}
                     />
@@ -114,12 +111,6 @@ const MyForm = (props) => {
                         label="Start Date"
                         inputValueFormat="DD/MM/YYYY"
                         dateFormat="YYYY-MM-DD"
-                        // dateFormatCalendar="dddd"
-                        // fixedHeight
-                        // showMonthDropdown
-                        // showYearDropdown
-                        // dropdownMode="select"
-                        //normalize={value => (value ? moment(value).format('YYYY-MM-DD') : null)}
                         component={renderDatePicker}
                         validate={[required, isdate]}
                         format={(value) => fmt(value)}
