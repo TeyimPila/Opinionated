@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form'
 import {Form, Col, Grid, Row, Button} from "react-bootstrap";
-import renderField from './renderField'
+import renderField from '../../../Opinionated/src/renderFields/renderField'
 
 const PeopleForm = (props) => {
 

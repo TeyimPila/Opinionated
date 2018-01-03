@@ -1,28 +1,20 @@
 import React from 'react'
-import moment from 'moment'
 
 import {Field, reduxForm} from 'redux-form'
 import {Form, Col, Grid, Row, Button} from "react-bootstrap";
-import renderField from './renderField'
-import renderStatic from './renderStatic'
-import renderSelect from './renderSelect'
-import renderCheckbox from './renderCheckbox'
-import renderTextArea from './renderTextArea'
-import renderRadio from './renderRadio'
-import renderDatePicker from './renderDatePicker'
+import renderField from '../../../Opinionated/src/renderFields/renderField'
+import renderStatic from '../../../Opinionated/src/renderFields/renderStatic'
+import renderSelect from '../../../Opinionated/src/renderFields/renderSelect'
+import renderCheckbox from '../../../Opinionated/src/renderFields/renderCheckbox'
+import renderTextArea from '../../../Opinionated/src/renderFields/renderTextArea'
+import renderRadio from '../../../Opinionated/src/renderFields/renderRadio'
+import renderDatePicker from '../../../Opinionated/src/renderFields/renderDatePicker'
+import {fmt} from "../util/date-funcs";
 
 //import { ControlLabel, FormControl, FormGroup, HelpBlock } from "react-bootstrap";
 
 const now = new Date()
 now.setHours(0, 0, 0, 0)
-
-const fmt = (dt) => {
-    // if it is a string that contains '/' then just return it
-    if(typeof(dt) === 'string' && dt.indexOf('/') > -1) {
-        return dt
-    }
-    return moment(dt).format("DD/MM/YYYY")
-}
 
 const required = value => value ? undefined : 'Required'
 const notsteve = value => value === 'Steve' ? 'Hmmm Steve' : undefined

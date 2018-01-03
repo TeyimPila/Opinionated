@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export function stringToDate(_date,_format,_delimiter)
 {
 
@@ -12,5 +14,13 @@ export function stringToDate(_date,_format,_delimiter)
     let formatedDate = dateItems[yearIndex] + '-' + month + '-' + dateItems[dayIndex]
 
     return formatedDate;
+}
+
+export const fmt = (dt) => {
+    // if it is a string that contains '/' then just return it
+    if(typeof(dt) === 'string' && dt.indexOf('/') > -1) {
+        return dt
+    }
+    return moment(dt).format("DD/MM/YYYY")
 }
 
