@@ -1,6 +1,15 @@
+/**
+ * Author : Steve Bond
+ * Date   : 01/01/2018
+ */
+
 import {createStore, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
+
+//====================================================================
+// Production store does not include devtools
+//====================================================================
 
 function configureStoreProd(initialState) {
     const middlewares = [

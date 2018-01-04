@@ -1,3 +1,9 @@
+/**
+ * Author : Steve Bond
+ * Date   : 01/01/2018
+ */
+
+
 import React from 'react';
 import {Field, reduxForm} from 'redux-form'
 import {Form, Col, Grid, Row, Button} from "react-bootstrap";

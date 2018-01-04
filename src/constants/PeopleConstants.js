@@ -1,3 +1,9 @@
+/**
+ * Author : Steve Bond
+ * Date   : 01/01/2018
+ */
+
+
 export const PEOPLE_SEARCH_REQUEST = 'PEOPLE_SEARCH_REQUEST';
 export const PEOPLE_SEARCH_SUCCESS = 'PEOPLE_SEARCH_SUCCESS';
 export const PEOPLE_SEARCH_FAILURE = 'PEOPLE_SEARCH_FAILURE';

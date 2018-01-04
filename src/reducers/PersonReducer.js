@@ -1,3 +1,9 @@
+/**
+ * Author : Steve Bond
+ * Date   : 01/01/2018
+ */
+
+
 import {
     PERSON_REQUEST,
     PERSON_SUCCESS,

@@ -1,17 +1,22 @@
-import React from 'react'
+/**
+ * Author : Steve Bond
+ * Date   : 01/01/2018
+ */
 
+
+import React from 'react'
 import {Field, reduxForm} from 'redux-form'
 import {Form, Col, Grid, Row, Button} from "react-bootstrap";
-import renderField from '../../../Opinionated/src/renderFields/renderField'
-import renderStatic from '../../../Opinionated/src/renderFields/renderStatic'
-import renderSelect from '../../../Opinionated/src/renderFields/renderSelect'
-import renderCheckbox from '../../../Opinionated/src/renderFields/renderCheckbox'
-import renderTextArea from '../../../Opinionated/src/renderFields/renderTextArea'
-import renderRadio from '../../../Opinionated/src/renderFields/renderRadio'
-import renderDatePicker from '../../../Opinionated/src/renderFields/renderDatePicker'
-import {fmt} from "../util/date-funcs";
 
-//import { ControlLabel, FormControl, FormGroup, HelpBlock } from "react-bootstrap";
+import renderField from "../renderFields/renderField";
+import renderStatic from '../renderFields/renderStatic'
+import renderSelect from '../renderFields/renderSelect'
+import renderCheckbox from '../renderFields/renderCheckbox'
+import renderTextArea from '../renderFields/renderTextArea'
+import renderRadio from '../renderFields/renderRadio'
+import renderDatePicker from '../renderFields/renderDatePicker'
+
+import {UKFormatDate} from "../util/date-funcs";
 
 const now = new Date()
 now.setHours(0, 0, 0, 0)
@@ -79,9 +84,10 @@ const MyForm = (props) => {
         <div className="well well-sm">
             <Form horizontal onSubmit={handleSubmit}>
                 <Grid>
+                    {!adding &&
                     <Field name="ID" label="ID"
                            component={renderStatic}
-                    />
+                    />}
                     <Field name="FirstName" type="text" label="First Name"
                            component={renderField}
                            validate={[required, maxLength15]}
@@ -113,7 +119,8 @@ const MyForm = (props) => {
                         dateFormat="YYYY-MM-DD"
                         component={renderDatePicker}
                         validate={[required, isdate]}
-                        format={(value) => fmt(value)}
+                        format={(value) => UKFormatDate(value)}
+                        readOnly={readOnly}
                     />
                     <Field name="Age" type="number" label="Age"
                            component={renderField}
@@ -162,7 +169,7 @@ const MyForm = (props) => {
 
                     {!adding && <Field name="Created" type="text" label="Created Date"
                                        component={renderStatic}
-                                       format={(value) => fmt(value)}
+                                       format={(value) => UKFormatDate(value)}
                     />}
 
                     <Row className="show-grid">

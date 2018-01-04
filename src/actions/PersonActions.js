@@ -1,3 +1,8 @@
+/**
+ * Author : Steve Bond
+ * Date   : 01/01/2018
+ */
+
 import 'whatwg-fetch'
 import {
     PERSON_REQUEST,
@@ -16,6 +21,10 @@ import {
     PEOPLE_ROOT_URL
 } from '../constants/PeopleConstants'
 
+//====================================================================
+// Clear the found Person in the state
+//====================================================================
+
 const clearPersonRequest = () => ({
     type: CLEAR_PERSON
 });
@@ -23,6 +32,10 @@ const clearPersonRequest = () => ({
 export const clearPerson = () => (dispatch) => {
     dispatch(clearPersonRequest());
 }
+
+//====================================================================
+// Get a Person
+//====================================================================
 
 const personRequest = () => ({
     type: PERSON_REQUEST
@@ -40,13 +53,9 @@ const personError = error => ({
 
 export const getPerson = (id) => (dispatch) => {
 
-    //console.log("getPerson ID:", id)
-
     dispatch(personRequest());
 
     let url = PEOPLE_ROOT_URL + 'gp/' + id
-
-    //console.log("getPerson URL:", url)
 
     fetch(url, {credentials: 'include'})
         .then(res => {
@@ -62,6 +71,10 @@ export const getPerson = (id) => (dispatch) => {
             dispatch(personError(error));
         });
 };
+
+//====================================================================
+// Delete a Person in the db
+//====================================================================
 
 const deletePersonRequest = () => ({
     type: DELETE_PERSON_REQUEST
@@ -79,13 +92,9 @@ const deletePersonError = error => ({
 
 export const deletePerson = (id) => (dispatch) => {
 
-    //console.log("deletePerson ID:", id)
-
     dispatch(deletePersonRequest());
 
     let url = PEOPLE_ROOT_URL + 'api/People/' + id
-
-    //console.log("deletePerson URL:", url)
 
     return fetch(url, {method: 'DELETE', credentials: 'include'})
         .then(res => {
@@ -102,6 +111,10 @@ export const deletePerson = (id) => (dispatch) => {
         });
 };
 
+//====================================================================
+// Save Person details
+//====================================================================
+
 const savePersonRequest = () => ({
     type: SAVE_PERSON_REQUEST
 });
@@ -117,8 +130,11 @@ const savePersonError = error => ({
 });
 
 export const savePerson = (values) => (dispatch) => {
+
     dispatch(savePersonRequest());
+
     let url = PEOPLE_ROOT_URL + 'api/People/' + values.ID
+
     fetch(url, {
         method: 'PUT',
         body: values,
@@ -138,6 +154,10 @@ export const savePerson = (values) => (dispatch) => {
         });
 };
 
+//====================================================================
+// Add a new person to the db
+//====================================================================
+
 const addPersonRequest = () => ({
     type: ADD_PERSON_REQUEST
 });
@@ -154,13 +174,10 @@ const addPersonError = error => ({
 
 export const addPerson = (values) => (dispatch) => {
 
-    //console.log("addPerson values:", values)
-
     dispatch(addPersonRequest());
 
     let url = PEOPLE_ROOT_URL + 'api/People/'
 
-    //console.log("addPerson URL:", url)
     let dat = JSON.stringify(values, null, 2)
     return fetch(url, {
         method: 'POST',

@@ -1,3 +1,9 @@
+/**
+ * Author : Steve Bond
+ * Date   : 01/01/2018
+ */
+
+
 import React from 'react'
 import Spinner from 'react-spinner'
 import 'react-spinner/react-spinner.css'

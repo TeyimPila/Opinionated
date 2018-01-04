@@ -1,3 +1,9 @@
+/**
+ * Author : Steve Bond
+ * Date   : 01/01/2018
+ */
+
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
@@ -47,11 +53,18 @@ const ShowValues = (props) => {
     const Values = () => {
 
         const o = form.values
-
-        const r = Object.keys(o).map((key, index) => {
-            return <tr key={index}><td>{key}</td><td>{': '}</td><td>{JSON.stringify(o[key])}</td></tr>
-        })
-        return (<table style={tablestyle}><tbody>{r}</tbody></table>)
+        if(o) {
+            const r = Object.keys(o).map((key, index) => {
+                return <tr key={index}>
+                    <td>{key}</td>
+                    <td>{': '}</td>
+                    <td>{JSON.stringify(o[key])}</td>
+                </tr>
+            })
+            return (<table style={tablestyle}>
+                <tbody>{r}</tbody>
+            </table>)
+        }
     }
 
     return <div className="well well-sm" style={style}>

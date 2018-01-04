@@ -1,3 +1,9 @@
+/**
+ * Author : Steve Bond
+ * Date   : 01/01/2018
+ */
+
+
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import PeopleContainer from './containers/PeopleContainer'
