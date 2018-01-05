@@ -3,21 +3,21 @@
  * Date   : 01/01/2018
  */
 
-
-import React from 'react'
-import Link from "react-router-dom/es/Link";
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Contact = () => (
-    <div className="well well-sm">
+  <div className="well well-sm">
+    <h2>Contact Page</h2>
 
-        <h2>Contact Page</h2>
+    <p>Your details here</p>
+    <p>You can contact Steve at aikidoshi@hotmail.com</p>
 
-        <p>Your details here</p>
-        <p>You can contact Steve at aikidoshi@hotmail.com</p>
+    <hr />
+    <h4>
+      <Link to="/">Home</Link>
+    </h4>
+  </div>
+);
 
-        <hr/>
-        <h4><Link to="/">Home</Link></h4>
-    </div>
-)
-
-export default Contact
+export default Contact;
